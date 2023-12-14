@@ -22,7 +22,7 @@ class Book extends Model implements Auditable
     'published_at',
     'total_copies',
     'available_copies',
-    'photoUrl',
+    'photo_url',
     'created_by',
     'updated_by',
     'deleted_by',

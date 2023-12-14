@@ -14,7 +14,12 @@ class Faculty extends Model
     'first_name',
     'last_name',
     'department_id',
-    'photoUrl',
+    'photo_url',
     'password',
   ];
+
+  public function borrow()
+  {
+    return $this->morphMany(BorrowDetail::class, 'borrower');
+  }
 }

@@ -18,4 +18,9 @@ class BorrowDetail extends Model
     'borower_type',
     'quantity',
   ];
+
+  public function borrower()
+  {
+    return $this->morphTo();
+  }
 }

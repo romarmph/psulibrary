@@ -17,7 +17,7 @@ class Staff extends Model implements Auditable
     'first_name',
     'last_name',
     'employee_number',
-    'photoUrl',
+    'photo_url',
     'password',
     'created_by',
     'updated_by',

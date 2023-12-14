@@ -19,4 +19,9 @@ class Student extends Model
     'photoUrl',
     'password',
   ];
+
+  public function borrow()
+  {
+    return $this->morphMany(BorrowDetail::class, 'borrower');
+  }
 }
