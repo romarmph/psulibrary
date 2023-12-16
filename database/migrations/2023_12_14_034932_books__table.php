@@ -21,9 +21,9 @@ return new class extends Migration
       $table->tinyInteger('total_copies')->default(0);
       $table->tinyInteger('available_copies')->default(0);
       $table->string('photo_url', 255)->default('');
-      $table->foreignId('created_by')->constrained('staffs');
-      $table->foreignId('updated_by')->constrained('staffs');
-      $table->foreignId('deleted_by')->nullable()->constrained('staffs');
+      $table->foreignId('created_by')->constrained('users');
+      $table->foreignId('updated_by')->constrained('users');
+      $table->foreignId('deleted_by')->nullable()->constrained('users');
       $table->softDeletes();
       $table->timestamps();
     });

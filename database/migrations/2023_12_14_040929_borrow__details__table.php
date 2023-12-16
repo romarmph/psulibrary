@@ -15,11 +15,9 @@ return new class extends Migration
       $table->id();
       $table->dateTime('borrowed_from_date')->default(now());
       $table->dateTime('borrowed_to_date')->default(now()->addDays(3));
-      $table->foreignId('issued_by')->constrained('staffs');
+      $table->foreignId('issued_by')->constrained('users');
       $table->dateTime('issued_at')->default(now());
-      $table->unsignedBigInteger('borrower_id');
-      $table->string('borrower_type');
-      $table->index(['borrower_id', 'borrower_type']);
+      $table->foreignId('borrower_id')->constrained('users');
     });
   }
 

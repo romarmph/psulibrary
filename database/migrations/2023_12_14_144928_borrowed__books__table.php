@@ -16,7 +16,7 @@ return new class extends Migration
       $table->foreignId('borrow_detail_id')->constrained('borrow_details');
       $table->foreignId('book_id')->constrained('books');
       $table->dateTime('returned_at')->nullable();
-      $table->foreignId('received_by')->nullable()->constrained('staffs');
+      $table->foreignId('received_by')->nullable()->constrained('users');
     });
   }
 

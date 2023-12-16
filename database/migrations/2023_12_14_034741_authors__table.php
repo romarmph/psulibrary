@@ -14,9 +14,9 @@ return new class extends Migration
     Schema::create('authors', function (Blueprint $table) {
       $table->id();
       $table->string('name', 150);
-      $table->foreignId('created_by')->constrained('staffs');
-      $table->foreignId('updated_by')->constrained('staffs');
-      $table->foreignId('deleted_by')->nullable()->constrained('staffs');
+      $table->foreignId('created_by')->constrained('users');
+      $table->foreignId('updated_by')->constrained('users');
+      $table->foreignId('deleted_by')->nullable()->constrained('users');
       $table->softDeletes();
       $table->timestamps();
     });
