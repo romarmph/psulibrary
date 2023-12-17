@@ -2,9 +2,9 @@
   <!-- Session Status -->
   <x-auth-session-status class="mb-4" :status="session('status')" />
 
-  <div class="px-8 pt-12">
+  <div class="w-36">
     <a href="/">
-      <x-application-logo class="w-20 h-20 text-gray-500 fill-current" />
+      <x-application-logo class="text-gray-500 fill-current " />
     </a>
   </div>
   <h1 class="p-4 text-3xl font-black text-blue-600">
