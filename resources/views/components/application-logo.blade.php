@@ -1,1 +1,1 @@
-<img src="/images/shelf-master.png" alt="">
+<img src="/images/logo.png" alt="" class="h-44 aspect-square">

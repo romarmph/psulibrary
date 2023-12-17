@@ -8,7 +8,7 @@
     </a>
   </div>
   <h1 class="p-4 text-3xl font-black text-blue-600">
-    Shelf Master
+    PSU Library
   </h1>
 
   <form method="POST" action="{{ route('login') }}" class="w-full">
@@ -16,9 +16,9 @@
 
     <!-- Email Address -->
     <div>
-      <x-input-label for="email" :value="__('Employee ID')" />
-      <x-text-input id="email" class="block w-full mt-1" type="text" name="email" :value="old('email')" required autofocus autocomplete="username" />
-      <x-input-error :messages="$errors->get('email')" class="mt-2" />
+      <x-input-label for="id_number" :value="__('ID Number')" />
+      <x-text-input id="id_number" class="block w-full mt-1" type="text" name="id_number" :value="old('id_number')" required autofocus autocomplete="username" />
+      <x-input-error :messages="$errors->get('id_number')" class="mt-2" />
     </div>
     <!-- Password -->
     <div class="mt-4">
