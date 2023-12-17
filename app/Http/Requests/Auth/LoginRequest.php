@@ -27,8 +27,8 @@ class LoginRequest extends FormRequest
   public function rules(): array
   {
     return [
-      'id_number' => ['required', 'string'],
-      'password' => ['required', 'string'],
+      'id_number' => 'required|exists:users,id_number',
+      'password' => 'required',
     ];
   }
 
@@ -81,5 +81,15 @@ class LoginRequest extends FormRequest
   public function throttleKey(): string
   {
     return Str::transliterate(Str::lower($this->input('id_number')) . '|' . $this->ip());
+  }
+
+
+  public function messages()
+  {
+    return [
+      'id_number.required' => 'Please enter your id number',
+      'id_number.exists' => 'Incorrect ID Number or Password',
+      'password.required' => 'Please enter your password',
+    ];
   }
 }
