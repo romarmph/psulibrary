@@ -19,14 +19,18 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-  if (Auth::check()) {
-    if (Auth::user()->role == 'staff') {
-      return redirect()->route('admin.home');
-    } else if (Auth::user()->role == 'borrower') {
-      return redirect()->route('borrower.home');
-    }
+  if (!Auth::check()) {
+    return view('/login');
   }
-  return view('/login');
+
+  switch (Auth::user()->role) {
+    case 'staff':
+      return redirect()->route('admin.home');
+    case 'borrower':
+      return redirect()->route('borrower.home');
+    default:
+      return view('/login');
+  }
 })->middleware('auth');
 
 Route::middleware(['auth', 'role:staff'])->group(function () {
