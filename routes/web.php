@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Livewire\Books\ListBooks;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Livewire\Admin\AdminHomePage;
+use App\Livewire\Borrower\BorrowerHomePage;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +18,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/', function () {
-  return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+  if (Auth::check()) {
+    if (Auth::user()->role == 'staff') {
+      return redirect()->route('admin.home');
+    } else if (Auth::user()->role == 'borrower') {
+      return redirect()->route('borrower.home');
+    }
+  }
+  return view('/login');
+})->middleware('auth');
+
+Route::middleware(['auth', 'role:staff'])->group(function () {
+  Route::get('/admin', AdminHomePage::class)->name('admin.home');
+});
+
+Route::middleware(['auth', 'role:borrower'])->group(function () {
+  Route::get('/borrower', BorrowerHomePage::class)->name('borrower.home');
+});
+
 
 Route::middleware('auth')->group(function () {
   Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
