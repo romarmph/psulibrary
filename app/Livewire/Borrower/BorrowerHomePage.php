@@ -8,6 +8,13 @@ class BorrowerHomePage extends Component
 {
   public function render()
   {
-    return view('livewire.borrower.borrower-home-page',)->layout('layouts.borrower');
+    $user = auth()->user();
+
+    return view(
+      'livewire.borrower.borrower-home-page',
+      [
+        'user' => $user,
+      ],
+    )->layout('layouts.borrower', ['title' => 'PSU Library']);
   }
 }
