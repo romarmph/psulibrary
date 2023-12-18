@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Books\ListBooks;
 use Illuminate\Support\Facades\Route;
 
 /*
