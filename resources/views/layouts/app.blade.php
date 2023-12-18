@@ -19,7 +19,7 @@
 <body class="font-sans antialiased">
   <div class="flex">
     <x-sidebar />
-    <div class="flex-1 min-h-screen bg-gray-50 dark:bg-gray-900 sm:ml-64">
+    <div class="flex-1 min-h-screen bg-gray-100 dark:bg-gray-900 sm:ml-64">
       <!-- Page Heading -->
       @if (isset($header))
       <header class="bg-white shadow dark:bg-gray-800">
