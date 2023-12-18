@@ -21,7 +21,7 @@ return new class extends Migration
       $table->string('address', 100);
       $table->string('photo_url', 200)->default('');
       $table->string('password')->hashes();
-      $table->enum('type', ['staff', 'student', 'faculty'])->default('staff');
+      $table->enum('role', ['staff', 'borrower'])->default('staff');
       $table->foreignId('created_by')->constrained('users');
       $table->foreignId('updated_by')->constrained('users');
       $table->foreignId('deleted_by')->nullable()->constrained('users');

@@ -14,23 +14,39 @@ class UserSeeder extends Seeder
    */
   public function run(): void
   {
-    User::create([
-      'first_name' => 'John',
-      'last_name' => 'Doe',
-      'id_number' => '20-UR-1234',
-      'email' => 'john.doe@example.com',
-      'phone_number' => '1234567890',
-      'address' => '123 Main St',
-      'photo_url' => 'https://example.com/john_doe.jpg',
-      'password' => Hash::make('password'),
-      'type' => 'staff',
-      'created_by' => 1,
-      'updated_by' => 1,
-      'created_at' => now(),
-      'updated_at' => now(),
-
-      // 'deleted_by' => 'Seeder', // You probably don't want to set this for a new user
-      // 'leted_at' => now(), // You probably don't want to set this for a new user
-    ]);
+    User::create(
+      [
+        'first_name' => 'John',
+        'last_name' => 'Doe',
+        'id_number' => '20-UR-1234',
+        'email' => 'john.doe@example.com',
+        'phone_number' => '1234567890',
+        'address' => '123 Main St',
+        'photo_url' => 'https://example.com/john_doe.jpg',
+        'password' => Hash::make('password'),
+        'role' => 'staff',
+        'created_by' => 1,
+        'updated_by' => 1,
+        'created_at' => now(),
+        'updated_at' => now(),
+      ],
+    );
+    User::create(
+      [
+        'first_name' => 'Tony',
+        'last_name' => 'Spork',
+        'id_number' => '20-UR-0001',
+        'email' => 'tony.spork@example.com',
+        'phone_number' => '091237212',
+        'address' => '123 Main St',
+        'photo_url' => 'https://example.com/john_doe.jpg',
+        'password' => Hash::make('password'),
+        'role' => 'borrower',
+        'created_by' => 1,
+        'updated_by' => 1,
+        'created_at' => now(),
+        'updated_at' => now(),
+      ],
+    );
   }
 }

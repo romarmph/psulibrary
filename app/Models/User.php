@@ -33,7 +33,7 @@ class User extends Authenticatable implements Auditable
     'address',
     'photo_url',
     'password',
-    'type',
+    'role',
     'created_by',
     'updated_by',
     'deleted_by',
