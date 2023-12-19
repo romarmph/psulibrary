@@ -37,10 +37,10 @@
     </div>
     <ul class="space-y-2 font-medium">
       <li>
-        <x-sidebar-links route="/" title="Dashboard" icon="heroicon-m-rectangle-group" />
+        <x-sidebar-links route="/" title="Dashboard" icon="fluentui-home-16" />
       </li>
       <li>
-        <x-sidebar-links route="/" title="Books" icon="heroicon-m-building-library" />
+        <x-sidebar-links route="/" title="Books" icon="fluentui-library-16" />
       </li>
     </ul>
   </div>
