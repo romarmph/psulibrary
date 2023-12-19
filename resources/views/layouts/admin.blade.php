@@ -19,11 +19,11 @@
 <body class="font-sans antialiased">
   <div class="flex">
     <x-sidebar />
-    <div class="flex-1 min-h-screen bg-gray-100 dark:bg-gray-900 sm:ml-64">
+    <div class="flex-1 min-h-screen bg-gray-50 dark:bg-gray-900 sm:ml-64">
       <!-- Page Heading -->
       @if (isset($header))
-      <header class="bg-white shadow dark:bg-gray-800">
-        <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <header class="p-4">
+        <div class="px-4 py-6 mx-auto bg-white rounded sm:px-6 lg:px-8 dark:bg-gray-800">
           {{ $header }}
         </div>
       </header>
