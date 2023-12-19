@@ -9,7 +9,7 @@
   </div>
   <div class="flex items-center justify-between">
     <div class="p-4 {{ $iconBgColor }} rounded-full">
-      @svg('fluentui-book-20', 'h-10 w-10 '.$iconColor)
+      @svg($icon, 'h-10 w-10 '.$iconColor)
     </div>
     <p class="text-5xl font-extrabold text-gray-600">{{ $value }}</p>
   </div>
