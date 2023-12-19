@@ -27,7 +27,7 @@
         </svg>
       </button>
     </div>
-    <div class="flex-1 min-h-screen bg-gray-50 dark:bg-gray-900 sm:ml-64">
+    <div class="flex-1 max-w-full min-h-screen bg-gray-50 dark:bg-gray-900 sm:ps-64">
       <!-- Page Heading -->
       @if (isset($header))
       <header class="p-4">
@@ -37,7 +37,7 @@
       </header>
       @endif
       <!-- Page Content -->
-      <main>
+      <main class="min-w-full">
         {{ $slot }}
       </main>
     </div>

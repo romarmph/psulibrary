@@ -40,7 +40,7 @@
         <x-sidebar-links route="/" title="Dashboard" icon="fluentui-home-16" />
       </li>
       <li>
-        <x-sidebar-links route="/" title="Books" icon="fluentui-library-16" />
+        <x-sidebar-links route="/" title="Books" icon="fluentui-library-20" />
       </li>
     </ul>
   </div>

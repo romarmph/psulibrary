@@ -7,6 +7,6 @@
     <livewire:components.dashboard-card :icon="'fluentui-book-coins-20'" :iconBgColor="'bg-green-500'" :iconColor="'text-white'" :title="'Current Books'" :route="''" :value="'75'" />
     <livewire:components.dashboard-card :icon="'fluentui-book-clock-20'" :iconBgColor="'bg-red-500'" :iconColor="'text-white'" :title="'Total Borrowed Books'" :route="'#'" :value="'25'" />
     <livewire:components.dashboard-card :icon="'fluentui-person-clock-20'" :iconBgColor="'bg-purple-500'" :iconColor="'text-white'" :title="'Total Borrowers'" :route="''" :value="'13'" />
-
   </div>
+  <livewire:books-table />
 </div>
