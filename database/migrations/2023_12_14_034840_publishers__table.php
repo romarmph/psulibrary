@@ -13,7 +13,7 @@ return new class extends Migration
   {
     Schema::create('publishers', function (Blueprint $table) {
       $table->id();
-      $table->string('publisher', 150);
+      $table->string('name', 150);
       $table->foreignId('created_by')->constrained('users');
       $table->foreignId('updated_by')->constrained('users');
       $table->foreignId('deleted_by')->nullable()->constrained('users');
