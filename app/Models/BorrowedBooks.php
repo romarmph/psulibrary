@@ -12,6 +12,7 @@ class BorrowedBooks extends Model
   protected $fillable = [
     'book_id',
     'borrower_detail_id',
+    'quantity',
     'returned_at',
     'received_by',
   ];
