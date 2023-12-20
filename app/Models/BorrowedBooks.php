@@ -9,6 +9,8 @@ class BorrowedBooks extends Model
 {
   use HasFactory;
 
+  public $timestamps = false;
+
   protected $fillable = [
     'book_id',
     'borrower_detail_id',

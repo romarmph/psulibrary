@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
     \App\Models\Publisher::factory(500)->create();
     \App\Models\Author::factory(1200)->create();
     \App\Models\Book::factory(2000)->create();
+    \App\Models\BorrowDetail::factory(279)->create();
+    \App\Models\BorrowedBooks::factory(361)->create();
 
 
 
