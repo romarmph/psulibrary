@@ -29,6 +29,10 @@ Route::get('/', function () {
   }
 })->middleware('auth');
 
+Route::get('/dashboard', function () {
+  return redirect('/');
+});
+
 
 
 
