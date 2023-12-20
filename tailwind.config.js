@@ -10,6 +10,7 @@ export default {
         "./resources/**/*.js",
         "./resources/**/*.vue",
         "./node_modules/flowbite/**/*.js",
+        "./vendor/rappasoft/laravel-livewire-tables/resources/views/**/*.blade.php",
     ],
 
     theme: {
@@ -19,6 +20,8 @@ export default {
             },
         },
     },
+
+    darkMode: "class",
 
     plugins: [forms, require("flowbite/plugin")],
 };

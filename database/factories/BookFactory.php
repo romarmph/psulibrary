@@ -25,7 +25,7 @@ class BookFactory extends Factory
       'published_at' => $this->faker->date(),
       'total_copies' => $this->faker->numberBetween(10, 50),
       'available_copies' => $this->faker->numberBetween(1, 10),
-      'photo_url' => $this->faker->imageUrl(),
+      'photo_url' => 'https://picsum.photos/500',
       'created_by' => $this->faker->numberBetween(1, 10),
       'updated_by' => $this->faker->numberBetween(1, 10),
       'deleted_by' => null,
