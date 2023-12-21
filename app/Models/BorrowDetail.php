@@ -15,7 +15,6 @@ class BorrowDetail extends Model
     'borrowed_from_date',
     'borrowed_to_date',
     'issued_by',
-    'issued_at',
     'borrower_id',
   ];
 

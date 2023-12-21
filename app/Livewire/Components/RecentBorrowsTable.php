@@ -11,6 +11,8 @@ class RecentBorrowsTable extends Component
 {
   use WithPagination;
 
+  public $perPage = 10;
+
   public function render()
   {
     $borrows = DB::table('borrowed_books')
@@ -24,12 +26,13 @@ class RecentBorrowsTable extends Component
         'books.isbn',
         'borrowed_books.quantity',
         'borrow_details.borrowed_from_date',
+        'borrow_details.borrowed_to_date',
       )
+      ->where('borrow_details.borrowed_from_date', '>=', now()->subDays(3))
       ->orderBy('borrow_details.borrowed_from_date', 'desc')
       ->paginate(10);
 
     dd($borrows);
-
     return view(
       'livewire.components.recent-borrows-table',
       [

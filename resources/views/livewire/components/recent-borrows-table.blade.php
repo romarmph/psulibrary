@@ -1,74 +1,78 @@
-<div class="relative overflow-x-auto sm:rounded-lg">
-  <table class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
-    <caption class="p-5 text-2xl font-semibold text-left text-gray-900 bg-white rtl:text-right dark:text-white dark:bg-gray-800">
-      Recently Borrowed Books
-      <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">
-        List of recently borrowed books.
-      </p>
-      <form class="max-w-md my-4">
-        <label for="recent-borrow-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-        <div class="relative">
-          <div class="absolute inset-y-0 flex items-center pointer-events-none start-0 ps-3">
-            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-            </svg>
+<div>
+  <section class="mt-10">
+    <div class="max-w-screen-xl px-4 mx-auto lg:px-12">
+      <!-- Start coding here -->
+      <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
+        <div class="flex items-center justify-between p-4 d">
+          <div class="flex">
+            <div class="relative w-full">
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <input type="text" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 " placeholder="Search" required="">
+            </div>
           </div>
-          <input type="search" id="recent-borrow-search" class="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg ps-10 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search books" required>
-          <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Search
-          </button>
+          <div class="flex space-x-3">
+            <div class="flex items-center space-x-3">
+              <label class="w-40 text-sm font-medium text-gray-900">User Type :</label>
+              <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                <option value="">All</option>
+                <option value="0">User</option>
+                <option value="1">Admin</option>
+              </select>
+            </div>
+          </div>
         </div>
-      </form>
-    </caption>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+              <tr>
+                <th scope="col" class="px-4 py-3">name</th>
+                <th scope="col" class="px-4 py-3">email</th>
+                <th scope="col" class="px-4 py-3">Role</th>
+                <th scope="col" class="px-4 py-3">Joined</th>
+                <th scope="col" class="px-4 py-3">Last update</th>
+                <th scope="col" class="px-4 py-3">
+                  <span class="sr-only">Actions</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b dark:border-gray-700">
+                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  name</th>
+                <td class="px-4 py-3">email</td>
+                <td class="px-4 py-3 text-green-500">
+                  admin</td>
+                <td class="px-4 py-3">created_at</td>
+                <td class="px-4 py-3">updated_at</td>
+                <td class="flex items-center justify-end px-4 py-3">
+                  <button class="px-3 py-1 text-white bg-red-500 rounded">X</button>
+                </td>
+              </tr>
 
-    <thead class="text-xs text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400">
-      <tr>
-        <th scope="col" class="px-6 py-3 hover:bg-gray-100">
-          ID No.
-        </th>
-        <th scope="col" class="px-6 py-3 hover:bg-gray-100">
-          Name
-        </th>
-        <th scope="col" class="px-6 py-3 hover:bg-gray-100">
-          Book ISBN
-        </th>
-        <th scope="col" class="px-6 py-3 hover:bg-gray-100">
-          Book Title
-        </th>
-        <th scope="col" class="px-6 py-3 hover:bg-gray-100">
-          Quantity
-        </th>
-        <th scope="col" class="px-6 py-3 hover:bg-gray-100">
-          Date
-        </th>
-        <th class="hover:bg-gray-100"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100">
-        <td class="px-6 py-4 ">
-          1
-        </td>
-        <td class="px-6 py-4">
-          Silver
-        </td>
-        <td class="px-6 py-4">
-          Laptop
-        </td>
-        <td class="px-6 py-4">
-          $2999
-        </td>
-        <td class="px-6 py-4">
-          8
-        </td>
-        <td class="px-6 py-4">
-          8
-        </td>
-        <td class="text-center">
-          <a href="" class="px-2 py-2 text-center text-white bg-blue-500 rounded-md hover:bg-blue-600">View</a>
-          <a href="" class="px-2 py-2 text-center text-white bg-green-500 rounded-md hover:bg-green-600">Return</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="px-3 py-4">
+          <div class="flex ">
+            <div class="flex items-center mb-3 space-x-4">
+              <label class="w-32 text-sm font-medium text-gray-900">Per Page</label>
+              <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </div>

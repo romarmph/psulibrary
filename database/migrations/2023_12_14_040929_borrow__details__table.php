@@ -16,7 +16,6 @@ return new class extends Migration
       $table->dateTime('borrowed_from_date')->default(now());
       $table->dateTime('borrowed_to_date')->default(now()->addDays(3));
       $table->foreignId('issued_by')->constrained('users');
-      $table->dateTime('issued_at')->default(now());
       $table->foreignId('borrower_id')->constrained('users');
     });
   }

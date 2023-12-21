@@ -19,11 +19,15 @@ class BorrowDetailFactory extends Factory
    */
   public function definition(): array
   {
+    $issued_at = $this->faker->dateTimeThisMonth();
+
+    // Add 3 days to the issued_at
+    $borrowed_to_date = (clone $issued_at)->modify('+3 days');
+
     return [
-      'borrowed_from_date' => $this->faker->dateTime(),
-      'borrowed_to_date' => $this->faker->dateTimeInInterval('3 days'),
+      'borrowed_from_date' => $issued_at,
+      'borrowed_to_date' => $borrowed_to_date,
       'issued_by' => User::where('role', 'staff')->inRandomOrder()->first()->id,
-      'issued_at' => $this->faker->dateTime(),
       'borrower_id' => User::where('role', 'borrower')->inRandomOrder()->first()->id,
     ];
   }
