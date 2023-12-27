@@ -16,11 +16,9 @@ class DatabaseSeeder extends Seeder
     $this->call(CourseSeeder::class);
     \App\Models\User::factory(500)->create();
     $this->call(CategorySeeder::class);
-    \App\Models\Publisher::factory(500)->create();
-    \App\Models\Author::factory(1200)->create();
-    \App\Models\Book::factory(2000)->create();
-    \App\Models\BorrowDetail::factory(279)->create();
-    \App\Models\BorrowedBooks::factory(361)->create();
+    \App\Models\Publisher::factory(232)->create();
+    \App\Models\Author::factory(389)->create();
+    \App\Models\Book::factory(500)->create();
 
 
 
