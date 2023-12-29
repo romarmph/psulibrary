@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Admin\AdminHomePage;
+use App\Livewire\Books;
 
 Route::middleware(['auth', 'role:staff'])->group(function () {
   Route::get('/admin', AdminHomePage::class)->name('admin.home');
@@ -12,3 +13,6 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
   Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
   Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+Route::get('/books', Books::class)->middleware('auth');
