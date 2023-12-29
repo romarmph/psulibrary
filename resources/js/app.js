@@ -1,6 +1,7 @@
 import "./bootstrap";
 import "flowbite";
-import "../../vendor/rappasoft/laravel-livewire-tables/resources/imports/laravel-livewire-tables.js";
+import "./../../vendor/power-components/livewire-powergrid/dist/powergrid";
+import "./../../vendor/power-components/livewire-powergrid/dist/tailwind.css";
 
 import Alpine from "alpinejs";
 
