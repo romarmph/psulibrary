@@ -4,33 +4,6 @@
 
 This is a library management system that allows users to check out books, return books, and add books to the library. The system is written in Laravel and uses a MySQL database to store information about the books and users.
 
-#### TODO
-
-##### Books
-
--   [ ] View list of books
--   [ ] Add book to library
--   [ ] Update book in library
--   [ ] View book Details
--   [ ] Remove book from library
-
-##### Borrowed Books
-
--   [ ] View list of borrowed books
--   [ ] Borrow book
--   [ ] Return book
--   [ ] View borrowed book details
-
-##### Adming Dashboard
-
--   [ ] Display number of books in library
--   [ ] Display number of borrowed books
--   [ ] Display number of users
--   [ ] Display number of users who have borrowed books
--   [ ] View list of recently borrowed books
--   [ ] View list of recently return books
--   [ ] View list of recent book list updates (additions, removals, updates)
-
 ## Installation
 
 ### Requirements
