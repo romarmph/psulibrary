@@ -150,6 +150,12 @@ final class BooksTable extends PowerGridComponent
        <a href="/books/edit/$book->id" class="px-2 py-2 text-xs font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Edit</a>
    HTML);
         }),
+      Button::add('view')
+        ->render(function ($book) {
+          return Blade::render(<<<HTML
+       <a href="/books/view/$book->id" class="px-2 py-2 text-xs font-bold text-white bg-green-500 rounded hover:bg-green-700">View</a>
+   HTML);
+        }),
     ];
   }
 
