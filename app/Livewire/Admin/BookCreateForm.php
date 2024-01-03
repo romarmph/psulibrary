@@ -19,6 +19,8 @@ class BookCreateForm extends Component
   public $publishers;
   public $authors;
 
+  public $oldBookId;
+  public $isEdit = false;
 
   public $title;
   public $isbn;
@@ -40,17 +42,32 @@ class BookCreateForm extends Component
         'categories' => $categories,
         'publishers' => $this->publishers,
         'authors' => $this->authors,
+        'mode' => $this->isEdit ? 'Edit' : 'Create',
       ]
     )->layout('layouts.admin');
   }
 
-  public function mount()
+  public function mount($id = null)
   {
+    if ($id) {
+      $this->oldBookId = $id;
+      $this->isEdit = true;
+      $book = \App\Models\Book::find($id);
+      $this->title = $book->title;
+      $this->isbn = $book->isbn;
+      $this->image = $book->photo_url;
+      $this->description = $book->description;
+      $this->category = $book->category_id;
+      $this->publisher = $book->publisher_id;
+      $this->published_at = $book->published_at;
+      $this->copies = $book->total_copies;
+      $this->selectedAuthors = $book->authors->pluck('id')->toArray();
+    }
     $this->publishers = \App\Models\Publisher::all();
     $this->authors = \App\Models\Author::all();
   }
 
-  public function createBook()
+  public function create()
   {
     $this->validate([
       'title' => 'required',
@@ -86,6 +103,57 @@ class BookCreateForm extends Component
     $this->dispatch('bookCreated');
 
     session()->flash('success', 'Book created successfully!');
+
+    return redirect()->route('books.index');
+  }
+
+  public function edit()
+  {
+    // dd($this->oldBookId);
+    $book = \App\Models\Book::find($this->oldBookId);
+
+    // dd($book);
+
+    $this->validate([
+      'title' => 'required',
+      'isbn' => 'required|unique:books,isbn,' . $book->id,
+      'description' => 'required',
+      'category' => 'required',
+      'publisher' => 'required',
+      'published_at' => 'required',
+      'copies' => 'required',
+    ]);
+
+
+    $book->title = $this->title;
+    $book->isbn = $this->isbn;
+    $book->description = $this->description;
+    $book->category_id = $this->category;
+    $book->publisher_id = $this->publisher;
+    $book->published_at = $this->published_at;
+    $book->total_copies = $this->copies;
+    $book->available_copies = $this->copies;
+    $book->updated_by = auth()->user()->id;
+
+    if (is_string($this->image)) {
+      $this->image = $book->photo_url;
+    } else {
+      $this->validate([
+        'image' => 'required|image|max:1024',
+      ]);
+      $name = md5($this->image . microtime()) . '.' . $this->image->extension();
+      $path = $this->image->storeAs('books', $name);
+      $url = Storage::url($path);
+      $book->photo_url = $url;
+    }
+
+    $book->save();
+
+    $book->authors()->sync($this->selectedAuthors);
+
+    $this->dispatch('bookUpdated');
+
+    session()->flash('success', 'Book updated successfully!');
 
     return redirect()->route('books.index');
   }

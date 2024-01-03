@@ -1,40 +1,41 @@
 <div class="p-4">
   <x-slot name="header">
-    <h1 class="text-2xl font-medium">New Book</h1>
+    <h1 class="text-2xl font-medium">Book</h1>
   </x-slot>
   <section class="bg-white rounded-lg dark:bg-gray-900">
     <div class="max-w-2xl p-4 mx-auto ">
-      <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Add a new book</h2>
-      <form wire:submit.prevent="createBook">
+      <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">{{ $mode }} book</h2>
+      <form wire:submit.prevent="{{ strtolower($mode) }}">
         <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
           <div class="col-span-2 sm:col-span-1">
             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ISBN</label>
-            <input type="text" name="isbn" id="isbn" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Type book ISBN" required="" wire:model="isbn">
+            <input type="text" name="isbn" id="isbn" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Type book ISBN" wire:model="isbn">
             @error('isbn') <span class="error">{{ $message }}</span> @enderror
           </div>
           <div class="col-span-2 sm:col-span-1">
             <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-            <input type="text" name="title" id="title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Book title" required="" wire:model="title">
+            <input type="text" name="title" id="title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Book title" wire:model="title">
             @error('title') <span class="error">{{ $message }}</span> @enderror
           </div>
           <div class="col-span-2">
-            @if ($image)
-            Photo Preview:
-            <img src="{{ $image->temporaryUrl() }}">
+            @if(is_string($image))
+            <img src="{{ $image }}" alt="">
+            @else
+            <img src="{{ $image->temporaryUrl() }}" alt="">
             @endif
             <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
-            <input type="file" name="image" id="image" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="0" required="" accept="image/png, image/jpeg" wire:model="image">
+            <input type="file" name="image" id="image" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="0" accept="image/png, image/jpeg" wire:model="image">
             @error('image') <span class="error">{{ $message }}</span> @enderror
           </div>
 
           <div class="col-span-2 sm:col-span-1">
             <label for="copies" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Copies</label>
-            <input type="number" name="copies" id="copies" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="0" required="" wire:model="copies">
+            <input type="number" name="copies" id="copies" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="0" wire:model="copies">
             @error('copies') <span class="error">{{ $message }}</span> @enderror
           </div>
           <div class="col-span-2 sm:col-span-1">
             <label for="published_at" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Published at</label>
-            <input type="text" name="published_at" id="published_at" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Year published" required="" wire:model="published_at">
+            <input type="text" name="published_at" id="published_at" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Year published" wire:model="published_at">
             @error('published_at') <span class="error">{{ $message }}</span> @enderror
           </div>
           <div class="col-span-2 sm:col-span-1">
@@ -90,7 +91,7 @@
           Cancel
         </a>
         <button type="submit" class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
-          Add book
+          {{ $mode }} book
         </button>
       </form>
     </div>

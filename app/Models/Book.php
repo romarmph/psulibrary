@@ -28,10 +28,10 @@ class Book extends Model implements Auditable
     'updated_by',
   ];
 
-  public function setPublishedAtAttribute($value)
-  {
-    $this->attributes['published_at'] = Carbon::createFromFormat('Y', $value)->format('Y-m-d');
-  }
+  // public function setPublishedAtAttribute($value)
+  // {
+  //   $this->attributes['published_at'] = Carbon::createFromFormat('Y', $value)->format('Y-m-d');
+  // }
 
   public function authors()
   {
