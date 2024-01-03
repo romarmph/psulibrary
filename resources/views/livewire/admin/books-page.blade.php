@@ -8,6 +8,4 @@
     <livewire:components.dashboard-card :icon="'fluentui-book-clock-20'" :iconBgColor="'bg-red-500'" :iconColor="'text-white'" :title="'Total Borrowed Books'" :value="'25'" />
     <livewire:components.dashboard-card :icon="'fluentui-person-clock-20'" :iconBgColor="'bg-purple-500'" :iconColor="'text-white'" :title="'Total Borrowers'" :route="''" :value="'13'" />
   </div>
-  <livewire:book-table />
 </div>
-l
