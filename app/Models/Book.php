@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -26,4 +27,14 @@ class Book extends Model implements Auditable
     'created_by',
     'updated_by',
   ];
+
+  public function setPublishedAtAttribute($value)
+  {
+    $this->attributes['published_at'] = Carbon::createFromFormat('Y', $value)->format('Y-m-d');
+  }
+
+  public function authors()
+  {
+    return $this->belongsToMany('App\Models\Author', 'book_authors');
+  }
 }

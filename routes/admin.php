@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Admin\AdminHomePage;
+use App\Livewire\Admin\BookCreateForm;
+use App\Livewire\Admin\BookCreatePage;
 use App\Livewire\Admin\BooksPage;
 
 Route::middleware(['auth', 'role:staff'])->group(function () {
@@ -17,7 +19,7 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
 Route::get('/books', BooksPage::class)->middleware('auth')->name('books.index');
 
 Route::middleware(['auth', 'role:staff'])->group(function () {
-  Route::get('/books/create', BooksPage::class)->name('books.create');
+  Route::get('/books/create', BookCreateForm::class)->name('books.create');
   Route::get('/books/edit/{id}', BooksPage::class)->name('books.edit');
   Route::get('/books/destroy/{id}', BooksPage::class)->name('books.delete');
 });

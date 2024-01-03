@@ -20,7 +20,6 @@ class AuthorFactory extends Factory
       'name' => $this->faker->name(),
       'created_by' => $this->faker->numberBetween(1, 10),
       'updated_by' => $this->faker->numberBetween(1, 10),
-      'deleted_by' => null,
     ];
   }
 }

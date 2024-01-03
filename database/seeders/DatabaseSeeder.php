@@ -18,8 +18,12 @@ class DatabaseSeeder extends Seeder
     \App\Models\User::factory(500)->create();
     $this->call(CategorySeeder::class);
     \App\Models\Publisher::factory(232)->create();
-    \App\Models\Author::factory(389)->create();
-    \App\Models\Book::factory(500)->create();
+    $authors = \App\Models\Author::factory()->count(300)->create();
+    \App\Models\Book::factory()->count(500)->create()->each(function ($book) use ($authors) {
+      $book->authors()->attach(
+        $authors->random(rand(1, 3))->pluck('id')->toArray()
+      );
+    });
 
 
 

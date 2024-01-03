@@ -46,7 +46,6 @@ class UserFactory extends Factory
       'role' => $role,
       'created_by' => $this->staffCount < 10 ? 1 : fake()->numberBetween(1, 10),
       'updated_by' => $this->staffCount < 10 ? 1 : fake()->numberBetween(1, 10),
-      'deleted_by' => null,
       'remember_token' => Str::random(10),
     ];
   }

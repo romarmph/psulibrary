@@ -21,7 +21,7 @@ final class BooksTable extends PowerGridComponent
 {
   use WithExport;
 
-  protected $listeners = ['refreshPowerGrid' => '$refresh'];
+  protected $listeners = ['bookCreated' => '$refresh'];
 
   public function setUp(): array
   {

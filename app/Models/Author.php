@@ -18,4 +18,9 @@ class Author extends Model implements Auditable
     'created_by',
     'updated_by',
   ];
+
+  public function books()
+  {
+    return $this->belongsToMany('App\Models\Book', 'book_authors');
+  }
 }

@@ -20,7 +20,6 @@ class PublisherFactory extends Factory
       'name' => $this->faker->company(),
       'created_by' => 1,
       'updated_by' => 1,
-      'deleted_by' => null,
     ];
   }
 }
