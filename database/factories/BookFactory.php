@@ -23,13 +23,12 @@ class BookFactory extends Factory
       'description' => $this->faker->sentence(10),
       'category_id' => $this->faker->numberBetween(1, 10),
       'publisher_id' => $this->faker->numberBetween(1, 10),
-      'published_at' => $this->faker->date(),
+      'published_at' => $this->faker->year('now'),
       'total_copies' => $copies,
       'available_copies' => $copies,
       'photo_url' => 'https://picsum.photos/500',
       'created_by' => $this->faker->numberBetween(1, 10),
       'updated_by' => $this->faker->numberBetween(1, 10),
-      'deleted_by' => null,
     ];
   }
 }

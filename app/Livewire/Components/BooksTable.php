@@ -2,9 +2,11 @@
 
 namespace App\Livewire\Components;
 
+use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
 use PowerComponents\LivewirePowerGrid\Button;
 use PowerComponents\LivewirePowerGrid\Column;
@@ -21,7 +23,7 @@ final class BooksTable extends PowerGridComponent
 {
   use WithExport;
 
-  protected $listeners = ['refreshPowerGrid' => '$refresh'];
+  protected $listeners = ['bookCreated' => '$refresh'];
 
   public function setUp(): array
   {
@@ -136,11 +138,24 @@ final class BooksTable extends PowerGridComponent
         ->id()
         ->class('bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded text-xs')
         ->openModal('modals.delete-book', ['book_id' => $row->id]),
+      // Button::add('edit')
+      //   ->slot('Edit')
+      //   ->id()
+      //   ->class('bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded text-xs')
+      //   ->route('books.edit', ['id' => $row->id])
+      //   ->target('_self'),
       Button::add('edit')
-        ->slot('Edit')
-        ->id()
-        ->class('bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded text-xs')
-        ->route('books.edit', ['id' => $row->id]),
+        ->render(function ($book) {
+          return Blade::render(<<<HTML
+       <a href="/books/edit/$book->id" class="px-2 py-2 text-xs font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Edit</a>
+   HTML);
+        }),
+      Button::add('view')
+        ->render(function ($book) {
+          return Blade::render(<<<HTML
+       <a href="/books/view/$book->id" class="px-2 py-2 text-xs font-bold text-white bg-green-500 rounded hover:bg-green-700">View</a>
+   HTML);
+        }),
     ];
   }
 

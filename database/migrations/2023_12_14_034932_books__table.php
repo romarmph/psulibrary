@@ -18,7 +18,7 @@ return new class extends Migration
       $table->string('description', 255);
       $table->foreignId('category_id')->constrained('categories');
       $table->foreignId('publisher_id')->constrained('publishers');
-      $table->date('published_at');
+      $table->year('published_at');
       $table->tinyInteger('total_copies')->default(0);
       $table->tinyInteger('available_copies')->default(0);
       $table->string('photo_url', 255)->default('');
