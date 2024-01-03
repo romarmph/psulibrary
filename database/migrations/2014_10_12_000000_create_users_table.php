@@ -24,8 +24,7 @@ return new class extends Migration
       $table->enum('role', ['staff', 'borrower'])->default('staff');
       $table->foreignId('created_by')->constrained('users');
       $table->foreignId('updated_by')->constrained('users');
-      $table->foreignId('deleted_by')->nullable()->constrained('users');
-      $table->timestamp('deleted_at')->nullable();
+      $table->softDeletes();
       $table->rememberToken();
       $table->timestamps();
     });

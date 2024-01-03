@@ -17,6 +17,5 @@ class Author extends Model implements Auditable
     'name',
     'created_by',
     'updated_by',
-    'deleted_by',
   ];
 }

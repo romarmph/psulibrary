@@ -14,4 +14,10 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
 });
 
 
-Route::get('/books', BooksPage::class)->middleware('auth');
+Route::get('/books', BooksPage::class)->middleware('auth')->name('books.index');
+
+Route::middleware(['auth', 'role:staff'])->group(function () {
+  Route::get('/books/create', BooksPage::class)->name('books.create');
+  Route::get('/books/edit/{id}', BooksPage::class)->name('books.edit');
+  Route::get('/books/destroy/{id}', BooksPage::class)->name('books.delete');
+});

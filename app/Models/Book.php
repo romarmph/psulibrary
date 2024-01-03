@@ -25,6 +25,5 @@ class Book extends Model implements Auditable
     'photo_url',
     'created_by',
     'updated_by',
-    'deleted_by',
   ];
 }
