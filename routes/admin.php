@@ -1,10 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Admin\AdminHomePage;
-use App\Livewire\Books;
+use App\Livewire\Admin\BooksPage;
 
 Route::middleware(['auth', 'role:staff'])->group(function () {
   Route::get('/admin', AdminHomePage::class)->name('admin.home');
@@ -15,4 +14,4 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
 });
 
 
-Route::get('/books', Books::class)->middleware('auth');
+Route::get('/books', BooksPage::class)->middleware('auth');
