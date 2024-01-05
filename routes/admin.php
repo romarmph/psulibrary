@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Admin\AdminHomePage;
+use App\Livewire\Admin\Authors\AuthorsPage;
+use App\Livewire\Admin\Publishers\PublishersPage;
+use App\Livewire\Admin\Staffs\StaffsPage;
 use App\Livewire\Admin\BookCreateForm;
 use App\Livewire\Admin\BookCreatePage;
 use App\Livewire\Admin\BookEditForm;
@@ -17,10 +20,16 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
 });
 
 
-Route::get('/books', BooksPage::class)->middleware('auth')->name('books.index');
+Route::get('/books', BooksPage::class)->middleware(['auth', 'role:staff'])->name('books.index');
 
 Route::middleware(['auth', 'role:staff'])->group(function () {
   Route::get('/books/create', BookCreateForm::class)->name('books.create');
   Route::get('/books/edit/{id}', BookCreateForm::class)->name('books.edit');
   Route::get('/books/destroy/{id}', BooksPage::class)->name('books.delete');
 });
+
+Route::get('/authors', AuthorsPage::class)->middleware(['auth', 'role:staff'])->name('authors.index');
+
+Route::get('/publishers', PublishersPage::class)->middleware(['auth', 'role:staff'])->name('publishers.index');
+
+Route::get('/staffs', StaffsPage::class)->middleware(['auth', 'role:staff'])->name('staffs.index');
