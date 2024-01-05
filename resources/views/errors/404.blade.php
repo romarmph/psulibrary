@@ -4,7 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
+  <link rel="stylesheet" href="{{ asset('build/assets/app-b2b172a9.css') }}">
+  <link rel="stylesheet" href="{{ asset('build/assets/app-f3e22746.css') }}">
+
+  <script src="{{ asset('build/assets/app-7e0e1771.js') }}"></script>
+  {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
   <title>Page Not Found</title>
 </head>
 <body>
