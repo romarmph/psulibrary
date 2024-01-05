@@ -13,4 +13,9 @@ class Category extends Model
     'name',
     'dewey',
   ];
+
+  public function books()
+  {
+    return $this->hasMany('App\Models\Book', 'category_id');
+  }
 }

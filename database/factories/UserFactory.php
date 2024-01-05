@@ -25,7 +25,7 @@ class UserFactory extends Factory
   public function definition(): array
   {
     $year = fake()->numberBetween(18, 23);
-    $number = str_pad(fake()->unique()->numberBetween(1, 500), 4, '0', STR_PAD_LEFT);
+    $number = str_pad(fake()->unique()->numberBetween(1, 600), 4, '0', STR_PAD_LEFT);
     $id_number = $year . '-UR-' . $number;
 
     $role = 'borrower';
@@ -44,6 +44,7 @@ class UserFactory extends Factory
       'photo_url' => fake()->imageUrl(),
       'password' => static::$password ??= Hash::make('password'),
       'role' => $role,
+      'course_id' => $this->staffCount < 10 ? null : fake()->numberBetween(1, 10),
       'created_by' => $this->staffCount < 10 ? 1 : fake()->numberBetween(1, 10),
       'updated_by' => $this->staffCount < 10 ? 1 : fake()->numberBetween(1, 10),
       'remember_token' => Str::random(10),

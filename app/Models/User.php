@@ -34,6 +34,7 @@ class User extends Authenticatable implements Auditable
     'photo_url',
     'password',
     'role',
+    'course_id',
     'created_by',
     'updated_by',
   ];

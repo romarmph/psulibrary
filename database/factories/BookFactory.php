@@ -18,7 +18,7 @@ class BookFactory extends Factory
   {
     $copies = $this->faker->numberBetween(10, 50);
     return [
-      'title' => $this->faker->sentence(1),
+      'title' => $this->faker->words(3, true),
       'isbn' => $this->faker->isbn13(),
       'description' => $this->faker->sentence(10),
       'category_id' => $this->faker->numberBetween(1, 10),
@@ -26,7 +26,7 @@ class BookFactory extends Factory
       'published_at' => $this->faker->year('now'),
       'total_copies' => $copies,
       'available_copies' => $copies,
-      'photo_url' => 'https://picsum.photos/500',
+      'photo_url' => $this->faker->imageUrl(),
       'created_by' => $this->faker->numberBetween(1, 10),
       'updated_by' => $this->faker->numberBetween(1, 10),
     ];

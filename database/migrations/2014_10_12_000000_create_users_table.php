@@ -22,6 +22,7 @@ return new class extends Migration
       $table->string('photo_url', 200)->default('');
       $table->string('password')->hashes();
       $table->enum('role', ['staff', 'borrower'])->default('staff');
+      $table->foreignId('course_id')->nullable()->constrained('courses');
       $table->foreignId('created_by')->constrained('users');
       $table->foreignId('updated_by')->constrained('users');
       $table->softDeletes();
