@@ -18,4 +18,9 @@ class Publisher extends Model implements Auditable
     'created_by',
     'updated_by',
   ];
+
+  public function books()
+  {
+    return $this->hasMany('App\Models\Book', 'publisher_id');
+  }
 }
