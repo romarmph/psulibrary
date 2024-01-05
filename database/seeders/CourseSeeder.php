@@ -64,5 +64,9 @@ class CourseSeeder extends Seeder
         'department_id' => 5,
       ],
     ];
+
+    foreach ($course as $course) {
+      \App\Models\Course::create($course);
+    }
   }
 }
