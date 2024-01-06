@@ -18,16 +18,22 @@
   <link rel="stylesheet" href="{{ asset('build/assets/app-f3e22746.css') }}">
 
   <script src="{{ asset('build/assets/app-7e0e1771.js') }}"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans antialiased">
 
   @if (isset($header))
-  <header class="flex items-center justify-between bg-white shadow dark:bg-gray-800">
+  <header class="fixed top-0 z-50 flex items-center justify-between w-full mt-0 bg-white shadow dark:bg-gray-800">
     <div class="px-4 py-6">
       {{ $header }}
     </div>
     <div class="flex items-center gap-4">
+      <div x-data="{ open: false }" @book-added.window="open = true; setTimeout(() => open = false, 1000);">
+        <button x-show="open" class="p-2 text-green-600 bg-green-200 border border-green-600 rounded-lg animate-pulse">Book Added to Cart</button>
+      </div>
+
+      <livewire:components.cart-button />
 
       <div class="flex gap-4">
         <a href="/borrower/books">Books</a>
@@ -58,7 +64,7 @@
   </header>
   @endif
 
-  <main>
+  <main class="mt-24">
     {{ $slot }}
   </main>
 

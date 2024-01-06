@@ -6,7 +6,7 @@ use App\Livewire\Borrower\Books\BorrowerBorrowedPage;
 use App\Livewire\Borrower\Books\BorrowerBooksPage;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Borrower\BorrowerHomePage;
-
+use App\Livewire\Borrower\CartPage;
 
 Route::middleware(['auth', 'role:borrower'])->group(function () {
   Route::get('/borrower', BorrowerHomePage::class)->name('borrower.home');
@@ -17,4 +17,5 @@ Route::middleware(['auth', 'role:borrower'])->group(function () {
 
   Route::get('/borrower/borrowed/', BorrowerBorrowedPage::class)->name('borrower.borrowed');
 
+  Route::get('/borrower/cart', CartPage::class)->name('borrower.cart');
 });

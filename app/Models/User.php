@@ -57,4 +57,9 @@ class User extends Authenticatable implements Auditable
   protected $casts = [
     'password' => 'hashed',
   ];
+
+  public function books()
+  {
+    return $this->belongsToMany('App\Models\Book', 'cart', 'user_id', 'book_id');
+  }
 }

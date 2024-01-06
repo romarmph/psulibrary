@@ -54,25 +54,10 @@
       </div>
     </section>
     @endif
-
     @foreach($books as $book)
-    <div>
-      <a href="{{ route('book.details', ['bookId' => $book->id]) }}">
-        <div class="relative flex flex-col p-4 bg-white rounded-lg shadow-md">
-          <img src="{{ $book->photo_url }}" alt="{{ $book->title }}" class="object-cover w-full h-40 mb-4 rounded-md">
-          <h3 class="text-lg font-semibold">{{ $book->title }}</h3>
-          <p class="mb-2 text-gray-600">ISBN: {{ $book->isbn }}</p>
-          <p class="overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap">{{ $book->description }}</p>
-          <div class="flex-grow"></div> <!-- Pushes the following content to the bottom -->
-          <div class="flex items-center justify-between mt-2">
-            <span class="text-lg font-bold text-blue-500">Available Copies: {{ $book->available_copies }}</span>
-            <a href="{{ route('book.borrow', ['bookId' => $book->id]) }}" class="px-2 py-2 text-white bg-blue-500 rounded-lg">Borrow</a>
-          </div>
-        </div>
-      </a>
-    </div>
-
+    <livewire:components.book-card :book="$book" :wire:key="'boook-'.$book->id" />
     @endforeach
+
   </div>
 
 
