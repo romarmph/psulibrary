@@ -63,4 +63,9 @@ class Book extends Model implements Auditable
   {
     return $this->belongsTo('App\Models\Publisher', 'publisher_id');
   }
+
+  public function users()
+  {
+    return $this->belongsToMany('App\Models\User', 'cart', 'book_id', 'user_id');
+  }
 }
