@@ -6,6 +6,7 @@ use App\Livewire\Admin\AdminHomePage;
 use App\Livewire\Admin\Authors\AuthorsPage;
 use App\Livewire\Admin\Publishers\PublishersPage;
 use App\Livewire\Admin\Staffs\StaffsPage;
+use App\Livewire\Admin\Staffs\StaffCreatePage;
 use App\Livewire\Admin\BookCreateForm;
 use App\Livewire\Admin\BookCreatePage;
 use App\Livewire\Admin\BookEditForm;
@@ -33,3 +34,4 @@ Route::get('/authors', AuthorsPage::class)->middleware(['auth', 'role:staff'])->
 Route::get('/publishers', PublishersPage::class)->middleware(['auth', 'role:staff'])->name('publishers.index');
 
 Route::get('/staffs', StaffsPage::class)->middleware(['auth', 'role:staff'])->name('staffs.index');
+Route::get('/staffs/create', StaffCreatePage::class)->middleware(['auth', 'role:staff'])->name('staffs.create');

@@ -14,4 +14,9 @@ class Course extends Model
     'department_id',
     'code',
   ];
+
+  public function courses()
+  {
+    return $this->hasMany('App\Models\Course', 'id');
+  }
 }
