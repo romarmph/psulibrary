@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
       'id' => 601,
       'first_name' => 'Tony',
       'last_name' => 'Spork',
-      'id_number' => '20-UR-601',
+      'id_number' => '20-UR-0601',
       'email' => 'tony.sporke@example.com',
       'phone_number' => '098167235',
       'address' => '123 Main St',
