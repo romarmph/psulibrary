@@ -9,7 +9,7 @@
       </h2>
     </div>
   </x-slot>
-  <h1 class="text-2xl font-medium">Borrowed Books</h1>
+  <h1 class="text-2xl font-medium">Requested Books</h1>
   <div class="p-8 ">
     <a href="/borrower/" class="flex items-center gap-4">
       <span>@svg('fluentui-arrow-left-20', 'h-4 w-4')</span>
@@ -17,6 +17,6 @@
     </a>
   </div>
   <div class="p-4">
-    <livewire:components.recent-borrows-table>
+    <livewire:components.requested-table>
   </div>
 </div>
