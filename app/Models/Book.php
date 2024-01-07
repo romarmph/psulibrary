@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class Book extends Model implements Auditable
@@ -32,6 +33,20 @@ class Book extends Model implements Auditable
   // {
   //   $this->attributes['published_at'] = Carbon::createFromFormat('Y', $value)->format('Y-m-d');
   // }
+
+  public static function years()
+  {
+    $data =  self::select(DB::raw('YEAR(published_at) as year'))
+      ->distinct()
+      ->pluck('year')
+      ->toArray();
+    $years = [];
+    foreach ($data as $year) {
+      array_push($years, ['code' => $year, 'value' => $year]);
+    }
+
+    return $years;
+  }
 
   public function scopeSearch($query, $search)
   {

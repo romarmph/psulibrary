@@ -2,9 +2,10 @@ import "./bootstrap";
 import "flowbite";
 import "./../../vendor/power-components/livewire-powergrid/dist/powergrid";
 import "./../../vendor/power-components/livewire-powergrid/dist/tailwind.css";
+import flatpickr from "flatpickr";
 
-import Alpine from "alpinejs";
+// import Alpine from "alpinejs";
 
-window.Alpine = Alpine;
+// window.Alpine = Alpine;
 
-Alpine.start();
+// Alpine.start();
