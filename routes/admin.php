@@ -11,6 +11,7 @@ use App\Livewire\Admin\BookCreateForm;
 use App\Livewire\Admin\BookCreatePage;
 use App\Livewire\Admin\BookEditForm;
 use App\Livewire\Admin\BooksPage;
+use App\Livewire\Admin\Requests\RequestPage;
 
 Route::middleware(['auth', 'role:staff'])->group(function () {
   Route::get('/admin', AdminHomePage::class)->name('admin.home');
@@ -41,3 +42,5 @@ Route::get('/staffs', StaffsPage::class)->middleware(['auth', 'role:staff'])->na
 Route::get('/staffs/create', StaffCreatePage::class)->middleware(['auth', 'role:staff'])->name('staffs.create');
 Route::get('/staffs/edit/{id}', StaffCreatePage::class)->middleware(['auth', 'role:staff'])->name('Staffs.edit');
 Route::get('/staffs/destroy/{id}', StaffCreatePage::class)->middleware(['auth', 'role:staff'])->name('staffs.delete');
+
+Route::get('/requests', RequestPage::class)->middleware(['auth', 'role:staff'])->name('requests.index');

@@ -53,7 +53,7 @@
     </div>
     <div class="flex items-center justify-between mt-4">
       <a href="/borrower/books" class="px-4 py-2 text-white bg-gray-500 rounded-lg hover:bg-gray-600 active:bg-gray-700">Look for more books</a>
-      <a href="/borrower/request" class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 active:bg-blue-700">Request</a>
+      <button wire:click="request" class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 active:bg-blue-700">Request</button>
     </div>
   </div>
 

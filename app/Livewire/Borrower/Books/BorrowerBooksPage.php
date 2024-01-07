@@ -4,9 +4,7 @@ namespace App\Livewire\Borrower\Books;
 
 use App\Models\Book;
 use App\Models\Category;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
-use Livewire\Livewire;
 use Livewire\WithPagination;
 
 class BorrowerBooksPage extends Component
