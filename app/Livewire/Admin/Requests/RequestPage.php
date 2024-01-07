@@ -6,8 +6,9 @@ use Livewire\Component;
 
 class RequestPage extends Component
 {
-    public function render()
-    {
-        return view('livewire.admin.requests.request-page');
-    }
+  public function render()
+  {
+    return view('livewire.admin.requests.request-page')
+      ->layout('layouts.admin');
+  }
 }
