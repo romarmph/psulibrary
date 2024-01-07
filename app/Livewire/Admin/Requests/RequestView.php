@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Admin\Requests;
 
-use App\Models\BorrowedBooks;
+use App\Models\Book;
+use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\On;
 use App\Models\BorrowRequest;
 use App\Models\RequestedBook;
 use App\Models\User;
@@ -15,7 +17,15 @@ class RequestView extends Component
   public function render()
   {
     $borrowRequest = BorrowRequest::where('id', $this->requestId)->first();
-    $borrower = User::where('id', $borrowRequest->user_id)->first();
+    $borrower = User::query()
+      ->join('courses', 'courses.id', '=', 'users.course_id')
+      ->join('departments', 'departments.id', '=', 'courses.department_id')
+      ->where('users.id', $borrowRequest->user_id)
+      ->select([
+        'users.*',
+        'courses.name as course',
+        'departments.name as department',
+      ])->first();
     $requestedBooks = RequestedBook::query()
       ->join('books', 'books.id', '=', 'requested_books.book_id')
       ->join('borrow_requests', 'borrow_requests.id', '=', 'requested_books.borrow_request_id')
@@ -23,6 +33,8 @@ class RequestView extends Component
       ->join('categories', 'categories.id', '=', 'books.category_id')
       ->where('borrow_requests.id', $this->requestId)
       ->select(
+        'borrow_requests.id as request_id',
+        'borrow_requests.user_id as borrower_id',
         'requested_books.book_id',
         'requested_books.quantity',
         'books.title',
@@ -41,7 +53,6 @@ class RequestView extends Component
     return view(
       'livewire.admin.requests.request-view',
       [
-        'borrowRequest' => $borrowRequest,
         'borrower' => $borrower,
         'requestedBooks' => $requestedBooks,
       ],

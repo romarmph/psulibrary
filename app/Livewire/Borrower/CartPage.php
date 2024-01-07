@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Borrower;
 
+use App\Models\Book;
 use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
@@ -56,6 +57,7 @@ class CartPage extends Component
       ->get();
   }
 
+  #[On('remove-from-cart')]
   public function removeFromCart($bookId)
   {
     $user = auth()->user();
@@ -68,9 +70,19 @@ class CartPage extends Component
     $this->dispatch('cartUpdated');
   }
 
+  #[On('increase-quantity')]
   public function increaseQuantity($bookId)
   {
     $user = auth()->user();
+    $book = Book::find($bookId);
+    $bookInCart = DB::table('carts')
+      ->where('user_id', '=', $user->id)
+      ->where('book_id', '=', $bookId);
+
+    if ($bookInCart->first()->quantity >= $book->available_copies) {
+      return;
+    }
+
 
     DB::table('carts')
       ->where('user_id', '=', $user->id)
@@ -80,9 +92,19 @@ class CartPage extends Component
     $this->dispatch('cartUpdated');
   }
 
+  #[On('decrease-quantity')]
   public function decreaseQuantity($bookId)
   {
     $user = auth()->user();
+    $bookInCart = DB::table('carts')
+      ->where('user_id', '=', $user->id)
+      ->where('book_id', '=', $bookId);
+
+    if ($bookInCart->first()->quantity <= 1) {
+      return;
+    }
+
+
 
     DB::table('carts')
       ->where('user_id', '=', $user->id)
@@ -95,9 +117,6 @@ class CartPage extends Component
   public function request()
   {
     $user = auth()->user();
-
-
-
 
     DB::table('borrow_requests')->insert([
       'user_id' => $user->id,
