@@ -43,4 +43,3 @@ Route::get('/staffs/create', StaffCreatePage::class)->middleware(['auth', 'role:
 Route::get('/staffs/edit/{id}', StaffCreatePage::class)->middleware(['auth', 'role:staff'])->name('Staffs.edit');
 Route::get('/staffs/destroy/{id}', StaffCreatePage::class)->middleware(['auth', 'role:staff'])->name('staffs.delete');
 
-Route::get('/requests', RequestPage::class)->middleware(['auth', 'role:staff'])->name('requests.index');
