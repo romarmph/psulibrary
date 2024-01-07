@@ -16,8 +16,10 @@ Route::middleware(['auth', 'role:borrower'])->group(function () {
   Route::get('/borrower/books/details/{bookId}', BookDetails::class)->name('book.details');
   Route::get('/borrower/books/borrow/{bookId}', BorrowBook::class)->name('book.borrow');
 
-  Route::get('/borrower/borrowed/', BorrowerBorrowedPage::class)->name('borrower.borrowed');
-  Route::get('/borrower/requested/', RequestPage::class)->name('borrower.requested');
+  Route::get('/borrower/borrowed/', BorrowerBorrowedPage::class)
+    ->name('borrower.borrowed');
+  Route::get('/borrower/requested/', RequestPage::class)
+    ->name('borrower.requested');
 
   Route::get('/borrower/cart', CartPage::class)->name('borrower.cart');
 });

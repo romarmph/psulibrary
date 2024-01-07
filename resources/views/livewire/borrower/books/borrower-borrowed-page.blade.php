@@ -9,14 +9,12 @@
       </h2>
     </div>
   </x-slot>
-  <h1 class="text-2xl font-medium">Borrowed Books</h1>
-  <div class="p-8 ">
-    <a href="/borrower/" class="flex items-center gap-4">
-      <span>@svg('fluentui-arrow-left-20', 'h-4 w-4')</span>
-      <span>Back</span>
-    </a>
-  </div>
-  <div class="p-4">
-    <livewire:components.recent-borrows-table>
+
+  <div class="p-12">
+    <h1 class="my-4 text-2xl font-medium">My Borrowed Books</h1>
+    <hr class="my-4" />
+    <div class="p-4">
+      <livewire:borrower.borrowed-books-table>
+    </div>
   </div>
 </div>
