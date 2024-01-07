@@ -16,8 +16,8 @@ class DashboardQuickInfo extends Component
   {
     $totalUniqueBooks = Book::count();
     $totalBookCopies = Book::sum('total_copies');
-    $totalBooksAvailable = Book::sum('available_copies');
-    $totalBooksIssued = $totalBookCopies - $totalBooksAvailable;
+    $totalBooksIssued = BorrowedBooks::whereNull('returned_at')->sum('quantity');
+    $totalBooksAvailable = $totalBookCopies - $totalBooksIssued;
 
     $totalBorrowers = BorrowDetail::where('borrowed_from_date', '<=', now())
       ->where('borrowed_to_date', '>=', now())

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Modals;
 
+use App\Models\Book;
 use App\Models\BorrowedBooks;
 use Illuminate\Support\Facades\DB;
 use LivewireUI\Modal\ModalComponent;
@@ -32,6 +33,8 @@ class ReturnBook extends ModalComponent
       'returned_at' => now(),
     ]);
 
+    $this->updateBook($this->book_id, $book->quantity);
+
     $book->save();
 
     $this->closeModal();
@@ -39,5 +42,16 @@ class ReturnBook extends ModalComponent
     session()->flash('success', 'Book returned successfully!');
 
     return redirect()->route('borrows.view', ['id' => $this->borrow_id]);
+  }
+
+  private function updateBook($book_id, $quantity)
+  {
+    $book = Book::find($book_id);
+
+    $book->update([
+      'available_copies' => $book->available_copies + $quantity,
+    ]);
+
+    $book->save();
   }
 }
