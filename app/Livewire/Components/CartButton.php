@@ -25,6 +25,8 @@ class CartButton extends Component
   }
 
   #[On('book-added')]
+  #[On('book-removed')]
+  #[On('cartUpdated')]
   public function refresh()
   {
     $this->count = Cart::where('user_id', auth()->id())->count();
