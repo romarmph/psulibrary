@@ -129,7 +129,14 @@ final class RequestsTable extends PowerGridComponent
 
   public function actions(\App\Models\BorrowRequest $row): array
   {
-    if ($row->status !== 'pending') return [];
+    if ($row->status !== 'pending') return [
+      Button::add('view')
+        ->render(function ($staff) {
+          return Blade::render(<<<HTML
+             <a href="/requests/$staff->id" class="px-2 py-2 text-xs font-bold text-white bg-blue-500 rounded hover:bg-blue-700">View</a>
+         HTML);
+        }),
+    ];
 
     return [
       Button::add('view')
