@@ -12,7 +12,7 @@ use Livewire\Component;
 
 class RequestView extends Component
 {
-  public $requestId = null;
+  public $requestId =  null;
 
   public function render()
   {
