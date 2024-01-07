@@ -17,6 +17,7 @@ return new class extends Migration
       $table->string('status');
       $table->date('borrow_date');
       $table->date('return_date');
+      $table->foreignId('updated_by')->nullable()->constrained('users');
       $table->timestamps();
     });
   }

@@ -132,6 +132,7 @@ class CartPage extends Component
         'book_id' => $book->id,
         'borrow_request_id' => $requestId,
         'quantity' => $book->quantity,
+        
       ]);
     }
 

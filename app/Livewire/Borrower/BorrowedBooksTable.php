@@ -16,9 +16,12 @@ use PowerComponents\LivewirePowerGrid\Header;
 use PowerComponents\LivewirePowerGrid\PowerGrid;
 use PowerComponents\LivewirePowerGrid\PowerGridColumns;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
+use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
 final class BorrowedBooksTable extends PowerGridComponent
 {
+  use WithExport;
+
   public string $primaryKey = 'books.id';
   public string $sortField = 'books.id';
 

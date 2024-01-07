@@ -14,5 +14,6 @@ class BorrowRequest extends Model
     'status',
     'borrow_date',
     'return_date',
+    'updated_by',
   ];
 }
