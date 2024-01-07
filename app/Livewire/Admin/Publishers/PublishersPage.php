@@ -9,7 +9,7 @@ class PublishersPage extends Component
 
     public $name;
 
-    public $oldAuthorId;
+    public $oldPublisherId;
     public $isEdit = false;
 
     public function render()
@@ -37,4 +37,43 @@ class PublishersPage extends Component
 
         return redirect()->route('publishers.index');
     }
+
+    public function mount($id = null)
+    {
+
+        $publisher = \App\Models\Publisher::find($id);
+
+        if ($publisher) {
+            
+            $this->isEdit = true;
+            $this->oldPublisherId = $id;
+            $this->name = $publisher->name;
+        }
+    }
+
+    public function edit()
+    {
+      
+      $publisher = \App\Models\Publisher::find($this->oldPublisherId);
+
+  
+      $this->validate([
+        'name' => 'required',
+      ]);
+  
+  
+      $publisher->name = $this->name;
+      $publisher->updated_by = auth()->user()->id;
+  
+  
+      $publisher->save();
+  
+  
+      $this->dispatch('publisherUpdated');
+  
+      session()->flash('success', 'Publisher updated successfully!');
+  
+      return redirect()->route('publishers.index');
+    }
+    
 }
