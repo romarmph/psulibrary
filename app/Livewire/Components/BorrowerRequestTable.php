@@ -17,9 +17,12 @@ use PowerComponents\LivewirePowerGrid\Header;
 use PowerComponents\LivewirePowerGrid\PowerGrid;
 use PowerComponents\LivewirePowerGrid\PowerGridColumns;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
+use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
-final class RequestsTable extends PowerGridComponent
+final class BorrowerRequestTable extends PowerGridComponent
 {
+  use WithExport;
+
   public string $primaryKey = 'borrow_requests.id';
   public string $sortField = 'borrow_requests.id';
 
@@ -40,35 +43,29 @@ final class RequestsTable extends PowerGridComponent
 
   public function datasource(): Builder
   {
+    $userId = auth()->user()->id;
     return BorrowRequest::query()
-      ->join('users', function ($users) {
-        $users->on('users.id', '=', 'borrow_requests.user_id');
-      })
-      ->join('requested_books', function ($requested_books) {
-        $requested_books->on('requested_books.borrow_request_id', '=', 'borrow_requests.id');
-      })
-      ->join('books', function ($books) {
-        $books->on('books.id', '=', 'requested_books.book_id');
-      })
+      ->join('users', 'borrow_requests.user_id', '=', 'users.id')
+      ->join('requested_books', 'borrow_requests.id', '=', 'requested_books.borrow_request_id')
+      ->where('borrow_requests.user_id', $userId)
       ->select([
         'borrow_requests.id',
-        'borrow_requests.user_id',
         'borrow_requests.status',
-        'borrow_requests.borrow_date as request_date',
-        'users.id_number as id_number',
-        DB::raw('CONCAT(users.first_name, " ", users.last_name) as name'),
+        'borrow_requests.borrow_date as requested_date',
+        'borrow_requests.updated_by',
         DB::raw('SUM(requested_books.quantity) as quantity'),
         DB::raw('COUNT(requested_books.book_id) as book_count'),
       ])
-      ->groupBy('borrow_requests.id', 'borrow_requests.status', 'borrow_requests.user_id', 'borrow_requests.created_at', 'borrow_requests.updated_at', 'users.first_name', 'borrow_requests.status', 'borrow_requests.borrow_date', 'borrow_requests.return_date', 'users.last_name', 'users.id_number');
+      ->groupBy('borrow_requests.id', 'borrow_requests.user_id', 'borrow_requests.status', 'borrow_requests.borrow_date', 'borrow_requests.updated_by');
   }
 
   public function addColumns(): PowerGridColumns
   {
     return PowerGrid::columns()
       ->addColumn('id')
-      ->addColumn('id_number')
-      ->addColumn('name')
+      ->addColumn('quantity')
+      ->addColumn('book_count')
+      ->addColumn('requested_date', fn ($row) => $row->requested_date ? Carbon::parse($row->requested_date)->format('M d, Y') : '')
       ->addColumn('status', function ($model) {
         if ($model->status === 'pending') {
           return '<span class="p-1 text-xs font-medium text-blue-500 bg-blue-200 border border-blue-500 rounded-lg">PENDING</span>';
@@ -80,21 +77,21 @@ final class RequestsTable extends PowerGridComponent
           return '<span class="p-1 text-xs font-medium text-gray-500 bg-gray-200 border border-gray-500 rounded-lg">CANCELED</span>';
         }
       })
-      ->addColumn('name_lower', fn (BorrowRequest $model) => strtolower(e($model->name)))
-      ->addColumn('request_date_formatted', fn (BorrowRequest $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
+      ->addColumn('updated_by');
   }
 
   public function columns(): array
   {
     return [
-      Column::make('ID', 'id')
-        ->hidden(),
+      Column::make('Request ID', 'id')
+        ->sortable()
+        ->searchable(),
 
-      Column::make('ID Number', 'id_number')
-        ->searchable()
-        ->sortable(),
+      Column::make('Quantity', 'quantity'),
 
-      Column::make('Requested By', 'name')
+      Column::make('Book Count', 'book_count'),
+
+      Column::make('Requested Date', 'requested_date')
         ->searchable()
         ->sortable(),
 
@@ -102,16 +99,9 @@ final class RequestsTable extends PowerGridComponent
         ->searchable()
         ->sortable(),
 
-      Column::make('Quantity', 'quantity')
+      Column::make('Updated By', 'updated_by')
         ->searchable()
         ->sortable(),
-
-      Column::make('No. Books', 'book_count')
-        ->searchable()
-        ->sortable(),
-
-      Column::make('Request Date', 'request_date_formatted', 'request_date')
-        ->searchable(),
 
       Column::action('Action')
     ];
@@ -125,32 +115,48 @@ final class RequestsTable extends PowerGridComponent
     ];
   }
 
-
+  #[\Livewire\Attributes\On('edit')]
+  public function edit($rowId): void
+  {
+    $this->js('alert(' . $rowId . ')');
+  }
 
   public function actions(\App\Models\BorrowRequest $row): array
   {
     if ($row->status !== 'pending') return [
       Button::add('view')
-        ->render(function ($staff) {
+        ->render(function ($row) {
           return Blade::render(<<<HTML
-             <a href="/requests/$staff->id" class="px-2 py-2 text-xs font-bold text-white bg-blue-500 rounded hover:bg-blue-700">View</a>
+             <a href="/borrower/requested/$row->id" class="px-2 py-2 text-xs font-bold text-white bg-blue-500 rounded hover:bg-blue-700">View</a>
          HTML);
         }),
     ];
 
     return [
       Button::add('view')
-        ->render(function ($staff) {
+        ->render(function ($row) {
           return Blade::render(<<<HTML
-             <a href="/requests/$staff->id" class="px-2 py-2 text-xs font-bold text-white bg-blue-500 rounded hover:bg-blue-700">View</a>
+             <a href="/borrower/requested/$row->id" class="px-2 py-2 text-xs font-bold text-white bg-blue-500 rounded hover:bg-blue-700">View</a>
          HTML);
         }),
 
-      Button::add('reject')
-        ->slot('Reject')
+      Button::add('cancel')
+        ->slot('Cancel')
         ->id('$row->id')
         ->class('bg-red-500 self-start hover:bg-red-700 text-white font-bold py-2 px-2 rounded text-xs')
-        ->openModal('modals.reject-request', ['request_id' => $row->id]),
+        ->openModal('modals.cancel-request', ['request_id' => $row->id]),
     ];
   }
+
+  /*
+    public function actionRules(\App\Models\Book $row): array
+    {
+       return [
+            // Hide button edit for ID 1
+            Rule::button('edit')
+                ->when(fn($row) => $row->id === 1)
+                ->hide(),
+        ];
+    }
+    */
 }

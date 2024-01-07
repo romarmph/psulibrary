@@ -30,7 +30,7 @@ class ReleaseBooks extends ModalComponent
 
     $this->closeModal();
 
-    return redirect()->route('borrow-requests.index');
+    return redirect()->route('requests.index');
   }
 
   private function releaseBooks($requestId)
@@ -70,10 +70,11 @@ class ReleaseBooks extends ModalComponent
 
   private function updateBook($bookId, $quantity)
   {
+    // dd($bookId, $quantity);
     $book = Book::find($bookId);
 
     $book->update([
-      'quantity' => $book->quantity - $quantity,
+      'available_copies' => $book->quantity - $quantity,
     ]);
 
     $book->save();

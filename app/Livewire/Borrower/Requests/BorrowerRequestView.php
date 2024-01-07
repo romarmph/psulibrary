@@ -1,18 +1,15 @@
 <?php
 
-namespace App\Livewire\Admin\Requests;
+namespace App\Livewire\Borrower\Requests;
 
-use App\Models\Book;
-use Illuminate\Support\Facades\DB;
-use Livewire\Attributes\On;
 use App\Models\BorrowRequest;
 use App\Models\RequestedBook;
 use App\Models\User;
 use Livewire\Component;
 
-class RequestView extends Component
+class BorrowerRequestView extends Component
 {
-  public $requestId =  null;
+  public $requestId;
 
   public function render()
   {
@@ -32,6 +29,7 @@ class RequestView extends Component
       ->join('publishers', 'publishers.id', '=', 'books.publisher_id')
       ->join('categories', 'categories.id', '=', 'books.category_id')
       ->where('borrow_requests.id', $this->requestId)
+      ->where('borrow_requests.user_id', auth()->user()->id)
       ->select(
         'borrow_requests.id as request_id',
         'borrow_requests.user_id as borrower_id',
@@ -50,13 +48,12 @@ class RequestView extends Component
       )->get();
 
 
-    return view(
-      'livewire.admin.requests.request-view',
-      [
-        'borrower' => $borrower,
-        'requestedBooks' => $requestedBooks,
-      ],
-    )->layout('layouts.admin');
+    $user = auth()->user();
+    return view('livewire.borrower.requests.borrower-request-view', [
+      'user' => $user,
+      'borrower' => $borrower,
+      'requestedBooks' => $requestedBooks,
+    ],)->layout('layouts.borrower');
   }
 
   public function mount($id)

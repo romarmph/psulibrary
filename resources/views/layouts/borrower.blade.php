@@ -25,8 +25,8 @@
 
       <div class="flex gap-4">
         <a href="/borrower/books">Books</a>
-        <a href="/borrower/requested">My Requested Books</a>
-        <a href="/borrower/borrowed">My Borrowed Books</a>
+        <a href="/borrower/requested">Requests</a>
+        <a href="/borrower/borrowed">Borrowed Books</a>
       </div>
       <x-dropdown align="right" width="48">
         <x-slot name="trigger">

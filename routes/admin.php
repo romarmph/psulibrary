@@ -11,6 +11,8 @@ use App\Livewire\Admin\BookCreateForm;
 use App\Livewire\Admin\BookCreatePage;
 use App\Livewire\Admin\BookEditForm;
 use App\Livewire\Admin\BooksPage;
+use App\Livewire\Admin\Borrows\BorrowsPage;
+use App\Livewire\Admin\Borrows\BorrowsView;
 use App\Livewire\Admin\Requests\RequestPage;
 use App\Livewire\Admin\Requests\RequestView;
 use App\Livewire\Borrower\Books\RequestPage as BooksRequestPage;
@@ -53,4 +55,10 @@ Route::group(['middleware' => ['auth', 'role:staff']], function () {
   Route::get('/requests', RequestPage::class)->name('requests.index');
   Route::get('/requests/{id}', RequestView::class)->name('requests.view');
   Route::get('/requests/destroy/{id}', RequestPage::class)->name('requests.delete');
+});
+
+
+Route::group(['middleware' => ['auth', 'role:staff']], function () {
+  Route::get('/borrows', BorrowsPage::class)->name('borrows.index');
+  Route::get('/borrows/{id}', BorrowsView::class)->name('borrows.view');
 });

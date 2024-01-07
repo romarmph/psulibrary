@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Livewire\Borrower\Books;
+namespace App\Livewire\Borrower\Requests;
 
 use Livewire\Component;
 
-class BorrowerBorrowedPage extends Component
+class BorrowerRequestPage extends Component
 {
   public function render()
   {
     $user = auth()->user();
-    return view('livewire.borrower.books.borrower-borrowed-page', [
+    return view('livewire.borrower.requests.borrower-request-page', [
       'user' => $user,
     ],)->layout('layouts.borrower');
   }
