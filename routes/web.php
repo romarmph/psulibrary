@@ -19,6 +19,12 @@ Route::get('/', function () {
     return view('/login');
   }
 
+  if (Auth::user()->deleted_at) {
+    Auth::logout();
+    session()->flash('account_deleted', 'Your account has been deleted.');
+    return view('/login');
+  }
+
   switch (Auth::user()->role) {
     case 'staff':
       return redirect()->route('admin.home');
