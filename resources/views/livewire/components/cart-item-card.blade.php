@@ -12,7 +12,7 @@
 
   <div class="flex items-center gap-4">
     <div class="flex items-center justify-center gap-4 text-center quantity w-28">
-      <button class="px-3 py-1 text-white bg-gray-500 rounded-lg hover:bg-gray-600 active:bg-gray-700" wire:click='decreaseQuantity({{ $book->id }})'>-</button>
+      <button class="px-3 py-1 text-white bg-gray-500 rounded-lg hover:bg-gray-600 active:bg-gray-700" wire:click='$dispatch(decrease-quantity", {bookId: {{ $book->id }}})'>-</button>
       <p class="px-4 py-2 bg-gray-100 rounded-lg">{{ $book->quantity }}</p>
       <button class="px-3 py-1 text-white bg-gray-500 rounded-lg hover:bg-gray-600 active:bg-gray-700" wire:click='increaseQuantity({{ $book->id }})'>+</button>
     </div>

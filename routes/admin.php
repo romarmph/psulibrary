@@ -13,6 +13,7 @@ use App\Livewire\Admin\BookEditForm;
 use App\Livewire\Admin\BooksPage;
 use App\Livewire\Admin\Requests\RequestPage;
 use App\Livewire\Admin\Requests\RequestView;
+use App\Livewire\Borrower\Books\RequestPage as BooksRequestPage;
 
 Route::middleware(['auth', 'role:staff'])->group(function () {
   Route::get('/admin', AdminHomePage::class)->name('admin.home');

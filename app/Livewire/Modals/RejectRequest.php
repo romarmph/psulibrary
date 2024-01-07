@@ -3,7 +3,6 @@
 namespace App\Livewire\Modals;
 
 use App\Models\BorrowRequest;
-use Livewire\Component;
 use LivewireUI\Modal\ModalComponent;
 
 class RejectRequest extends ModalComponent
@@ -18,10 +17,9 @@ class RejectRequest extends ModalComponent
     ]);
   }
 
-  public function rejectRequest($id)
+  public function rejectRequest($requestId)
   {
-
-    $request = BorrowRequest::findOrFail($id);
+    $request = BorrowRequest::findOrFail($requestId);
     if ($request) {
       $request->status = 'rejected';
     }
