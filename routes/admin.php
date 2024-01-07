@@ -12,6 +12,7 @@ use App\Livewire\Admin\BookCreatePage;
 use App\Livewire\Admin\BookEditForm;
 use App\Livewire\Admin\BooksPage;
 use App\Livewire\Admin\Requests\RequestPage;
+use App\Livewire\Admin\Requests\RequestView;
 
 Route::middleware(['auth', 'role:staff'])->group(function () {
   Route::get('/admin', AdminHomePage::class)->name('admin.home');
@@ -38,8 +39,17 @@ Route::get('/publishers', PublishersPage::class)->middleware(['auth', 'role:staf
 Route::get('/publishers/edit/{id}', PublishersPage::class)->middleware(['auth', 'role:staff'])->name('publishers.edit');
 Route::get('/publisher/destroy/{id}', PublishersPage::class)->middleware(['auth', 'role:staff'])->name('publishers.delete');
 
-Route::get('/staffs', StaffsPage::class)->middleware(['auth', 'role:staff'])->name('staffs.index');
-Route::get('/staffs/create', StaffCreatePage::class)->middleware(['auth', 'role:staff'])->name('staffs.create');
-Route::get('/staffs/edit/{id}', StaffCreatePage::class)->middleware(['auth', 'role:staff'])->name('Staffs.edit');
-Route::get('/staffs/destroy/{id}', StaffCreatePage::class)->middleware(['auth', 'role:staff'])->name('staffs.delete');
+Route::group(['middleware' => ['auth', 'role:staff']], function () {
+  Route::get('/staffs', StaffsPage::class)->name('staffs.index');
+  Route::get('/staffs/create', StaffCreatePage::class)->name('staffs.create');
+  Route::get('/staffs/edit/{id}', StaffCreatePage::class)->name('Staffs.edit');
+  Route::get('/staffs/destroy/{id}', StaffCreatePage::class)->name('staffs.delete');
+});
 
+
+
+Route::group(['middleware' => ['auth', 'role:staff']], function () {
+  Route::get('/requests', RequestPage::class)->name('requests.index');
+  Route::get('/requests/{id}', RequestView::class)->name('requests.view');
+  Route::get('/requests/destroy/{id}', RequestPage::class)->name('requests.delete');
+});

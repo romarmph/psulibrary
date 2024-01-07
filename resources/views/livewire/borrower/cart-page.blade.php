@@ -47,14 +47,16 @@
       @endforeach
     </div>
     <hr class="my-4" />
+    @if($cartCount > 0)
     <div class="flex items-center justify-between">
       <p class="text-xl font-bold text-gray-800">Total</p>
-      <p class="text-xl font-bold text-gray-800">4</p>
+      <p class="text-xl font-bold text-gray-800">{{ $total }}</p>
     </div>
     <div class="flex items-center justify-between mt-4">
       <a href="/borrower/books" class="px-4 py-2 text-white bg-gray-500 rounded-lg hover:bg-gray-600 active:bg-gray-700">Look for more books</a>
       <button wire:click="request" class="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 active:bg-blue-700">Request</button>
     </div>
+    @endif
   </div>
 
 </div>
