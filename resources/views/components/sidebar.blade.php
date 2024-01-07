@@ -43,6 +43,9 @@
         <x-sidebar-links route="/books" title="Books" icon="fluentui-library-20" />
       </li>
       <li>
+        <x-sidebar-links route="/requests" title="Requests" icon="fluentui-clipboard-text-edit-24" />
+      </li>
+      <li>
         <x-sidebar-links route="/authors" title="Authors" icon="fluentui-whiteboard-24" />
       </li>
       <li>
