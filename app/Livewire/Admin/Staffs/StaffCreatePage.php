@@ -22,7 +22,6 @@ class StaffCreatePage extends Component
     public $address;
     public $photo_url;
     public $password;
-    public $course_id;
     public $image;
 
     public function render()
@@ -46,7 +45,6 @@ class StaffCreatePage extends Component
             'address' => 'required',
             'image' => 'required|image|max:1024',
             'password' => 'required',
-            'course_id' => 'required',
         ]);
 
         $role = 'staff';
@@ -65,7 +63,6 @@ class StaffCreatePage extends Component
             'photo_url' => $url,
             'password' => $this->password,
             'role' => $role,
-            'course_id' => $this->course_id,
             'created_by' => auth()->user()->id,
             'updated_by' => auth()->user()->id,
         ]);
@@ -91,7 +88,6 @@ class StaffCreatePage extends Component
             $this->address = $staff->address;
             $this->password = '';
             $this->image = $staff->photo_url;
-            $this->course_id = $staff->course_id;
         }
     }
 
@@ -104,7 +100,6 @@ class StaffCreatePage extends Component
         'email' => 'required',
         'phone_number' => 'required',
         'address' => 'required',
-        'course_id' => 'required',
     ]);
 
     $staff = \App\Models\User::find($this->oldStaffId);
@@ -118,7 +113,6 @@ class StaffCreatePage extends Component
             'email' => $this->email,
             'phone_number' => $this->phone_number,
             'address' => $this->address,
-            'course_id' => $this->course_id,
             'updated_by' => auth()->user()->id,
         ]);
 
