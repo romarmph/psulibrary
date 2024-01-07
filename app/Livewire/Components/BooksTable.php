@@ -64,7 +64,7 @@ final class BooksTable extends PowerGridComponent
 
       ->addColumn('category')
       ->addColumn('publisher')
-      ->addColumn('published_at_formatted', fn ($model) => Carbon::parse($model->published_at)->format('Y'))
+      ->addColumn('published_at',)
       ->addColumn('total_copies')
       ->addColumn('available_copies')
       ->addColumn('photo_url', fn ($model) => '<img src="' . $model->photo_url . '" class="object-cover w-10 h-10 rounded-full" alt="photo_url">')
@@ -87,7 +87,7 @@ final class BooksTable extends PowerGridComponent
 
       Column::make('Category', 'category')->sortable(),
       Column::make('Publisher', 'publisher')->sortable(),
-      Column::make('Published at', 'published_at_formatted', 'published_at')
+      Column::make('Published at', 'published_at')
         ->sortable(),
 
       Column::make('Total copies', 'total_copies'),
@@ -110,23 +110,21 @@ final class BooksTable extends PowerGridComponent
     ];
   }
 
-  // public function filters(): array
-  // {
-  //   return [
-  //     Filter::select('serving_at', 'serving_at')
-  //       ->dataSource(Category::all())
-  //       ->optionValue('serving_at')
-  //       ->optionLabel('serving_at'),
-  //     // Filter::inputText('description')->operators(['contains']),
-  //     // Filter::datepicker('published_at'),
-  //     // Filter::boolean('total_copies'),
-  //     // Filter::boolean('available_copies'),
-  //     // Filter::inputText('photo_url')->operators(['contains']),
-  //     // Filter::datetimepicker('deleted_at'),
-  //     // Filter::datetimepicker('created_at'),
-  //     // Filter::datetimepicker('updated_at'),
-  //   ];
-  // }
+  public function filters(): array
+  {
+    return [
+      Filter::inputText('title')->operators(['contains']),
+      Filter::inputText('isbn')->operators(['contains']),
+      Filter::inputText('description')->operators(['contains']),
+      Filter::inputText('description')->operators(['contains']),
+      Filter::select('published_at')->dataSource(Book::years())->optionValue('code')->optionLabel('value'),
+      Filter::inputText('total_copies')->operators(['is']),
+      Filter::inputText('available_copies')->operators(['is']),
+      Filter::datetimepicker('deleted_at_formatted', 'books.deleted_at'),
+      Filter::datetimepicker('created_at_formatted', 'books.created_at'),
+      Filter::datetimepicker('updated_at_formatted', 'books.updated_at'),
+    ];
+  }
 
 
 

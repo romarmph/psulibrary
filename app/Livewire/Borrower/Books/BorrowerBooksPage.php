@@ -31,6 +31,7 @@ class BorrowerBooksPage extends Component
     })->paginate($this->limit);
 
 
+
     $user = auth()->user();
     return view('livewire.borrower.books.borrower-books-page', [
       'user' => $user,

@@ -38,7 +38,10 @@ final class AuthorsTable extends PowerGridComponent
 
   public function datasource(): Builder
   {
-    return DB::table('authors');
+    return DB::table('authors')
+      ->join('users as u1', 'authors.created_by', '=', 'u1.id')
+      ->join('users as u2', 'authors.updated_by', '=', 'u2.id')
+      ->select('authors.*', DB::raw('CONCAT(u1.first_name, " ", u1.last_name) as created_by'), DB::raw('CONCAT(u2.first_name, " ", u2.last_name) as updated_by'));
   }
 
   public function addColumns(): PowerGridColumns
@@ -53,6 +56,7 @@ final class AuthorsTable extends PowerGridComponent
       ->addColumn('created_by')
       ->addColumn('updated_by')
 
+      ->addColumn('deleted_at_formatted', fn ($model) => $model->deleted_at ? Carbon::parse($model->deleted_at)->format('d/m/Y H:i:s') : null)
       ->addColumn('created_at_formatted', fn ($model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'))
       ->addColumn('updated_at_formatted', fn ($model) => Carbon::parse($model->updated_at)->format('d/m/Y H:i:s'));
   }
@@ -68,11 +72,13 @@ final class AuthorsTable extends PowerGridComponent
       Column::make('Created by', 'created_by'),
       Column::make('Updated by', 'updated_by'),
 
-
       Column::make('Created at', 'created_at_formatted', 'created_at')
         ->sortable(),
 
       Column::make('Updated at', 'updated_at_formatted', 'updated_at')
+        ->sortable(),
+
+      Column::make('Deleted at', 'deleted_at_formatted', 'deleted_at')
         ->sortable(),
 
       Column::action('Actions'),
@@ -104,18 +110,18 @@ final class AuthorsTable extends PowerGridComponent
         ->id()
         ->class('bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded text-xs')
         ->openModal('modals.delete-author', ['author_id' => $row->id]),
-      
-        Button::add('edit')
+
+      Button::add('edit')
         ->render(function ($author) {
           return Blade::render(<<<HTML
        <a href="/authors/edit/$author->id" class="px-2 py-2 text-xs font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Edit</a>
      HTML);
-        }),    
-    //   Button::add('edit')
-    //     ->slot('Edit: ' . $row->id)
-    //     ->id()
-    //     ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
-    //     ->dispatch('edit', ['rowId' => $row->id])
+        }),
+      //   Button::add('edit')
+      //     ->slot('Edit: ' . $row->id)
+      //     ->id()
+      //     ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
+      //     ->dispatch('edit', ['rowId' => $row->id])
     ];
   }
 

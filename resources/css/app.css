@@ -1,3 +1,11 @@
+@import "flatpickr/dist/flatpickr.min.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .error {
+    @apply p-2 text-sm font-light text-red-500 bg-red-200 border border-red-500 rounded-lg;
+  }
+}
