@@ -3,6 +3,7 @@
 namespace App\Livewire\Components;
 
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use PowerComponents\LivewirePowerGrid\Button;
@@ -142,23 +143,36 @@ final class StaffsTable extends PowerGridComponent
   }
 
   #[\Livewire\Attributes\On('edit')]
-  public function edit($rowId): void
-  {
-    $this->js('alert(' . $rowId . ')');
-  }
+    public function edit($rowId): void
+    {
+        $this->js('alert('.$rowId.')');
+    }
 
-  public function actions($row): array
-  {
-    return [
-      Button::add('edit')
-        ->slot('Edit: ' . $row->id)
-        ->id()
-        ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
-        ->dispatch('edit', ['rowId' => $row->id])
-    ];
-  }
+    public function actions($row): array
+    {
+        return [
+            Button::add('delete')
+            ->slot('Delete')
+            ->id()
+            ->class('bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded text-xs')
+            ->openModal('modals.delete-book', ['Staff_id' => $row->id]),
+
+            Button::add('edit')
+        ->render(function ($staff) {
+          return Blade::render(<<<HTML
+       <a href="/staffs/edit/$staff->id" class="px-2 py-2 text-xs font-bold text-white bg-blue-500 rounded hover:bg-blue-700">Edit</a>
+   HTML);
+        }),
+            // Button::add('edit')
+            //     ->slot('Edit: '.$row->id)
+            //     ->id()
+            //     ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
+            //     ->dispatch('edit', ['rowId' => $row->id])
+        ];
+    }
 
   /*
+
     public function actionRules($row): array
     {
        return [
