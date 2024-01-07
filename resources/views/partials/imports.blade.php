@@ -16,8 +16,8 @@
 {{-- <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
 <!-- Scripts -->
 
-<link rel="stylesheet" href="{{ asset('build/assets/app-9f0258d6.css.css') }}">
-<link rel="stylesheet" href="{{ asset('build/assets/app-b2b172a9.css.css') }}">
+<link rel="stylesheet" href="{{ asset('build/assets/app-9f0258d6.css') }}">
+<link rel="stylesheet" href="{{ asset('build/assets/app-b2b172a9.css') }}">
 
 <script src="{{ asset('build/assets/app-1c195aa5.js') }}"></script>
 
