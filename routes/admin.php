@@ -30,8 +30,12 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
 });
 
 Route::get('/authors', AuthorsPage::class)->middleware(['auth', 'role:staff'])->name('authors.index');
+Route::get('/authors/destroy/{id}', AuthorsPage::class)->middleware(['auth', 'role:staff'])->name('authors.delete');
+Route::get('/authors/edit/{id}', AuthorsPage::class)->middleware(['auth', 'role:staff'])->name('authors.edit');
 
 Route::get('/publishers', PublishersPage::class)->middleware(['auth', 'role:staff'])->name('publishers.index');
+Route::get('/publishers/edit/{id}', PublishersPage::class)->middleware(['auth', 'role:staff'])->name('publishers.edit');
+Route::get('/publisher/destroy/{id}', PublishersPage::class)->middleware(['auth', 'role:staff'])->name('publishers.delete');
 
 Route::get('/staffs', StaffsPage::class)->middleware(['auth', 'role:staff'])->name('staffs.index');
 Route::get('/staffs/create', StaffCreatePage::class)->middleware(['auth', 'role:staff'])->name('staffs.create');
